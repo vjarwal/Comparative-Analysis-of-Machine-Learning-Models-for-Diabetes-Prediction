@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabo Detect - Diabetes Prediction</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gabriela+Stencil&display=swap');
+        
+        body {
+            font-family: 'Gabriela Stencil', serif;
+            text-align: center;
+            background: url('https://media.giphy.com/media/3oriOcC1Oc10FzdpTy/giphy.gif') center/cover no-repeat fixed;
+            margin: 0;
+            padding: 0;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .container {
+            position: relative;
+            width: 40%;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            z-index: 2;
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        #result {
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 80%;
+                padding: 20px;
+            }
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>''
+</head>
+<body>
+    <div class="container">
+        <h2>Diabo Detect - Check Your Diabetes Risk</h2>
+        <p>Enter your details below:</p>
+       
+        <input type="number" id="pregnancies" placeholder="Pregnancies">
+        <input type="number" id="glucose" placeholder="Glucose">
+        <input type="number" id="bloodPressure" placeholder="Blood Pressure">
+        <input type="number" id="skinThickness" placeholder="Skin Thickness">
+        <input type="number" id="insulin" placeholder="Insulin">
+        <input type="number" id="bmi" placeholder="BMI">
+        <input type="number" id="dpf" placeholder="Diabetes Pedigree Function">
+        <input type="number" id="age" placeholder="Age">
+       
+        <button onclick="predictDiabetes()">Check Diabetes</button>
+       
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function predictDiabetes() {
+            let features = [
+                document.getElementById("pregnancies").value,
+                document.getElementById("glucose").value,
+                document.getElementById("bloodPressure").value,
+                document.getElementById("skinThickness").value,
+                document.getElementById("insulin").value,
+                document.getElementById("bmi").value,
+                document.getElementById("dpf").value,
+                document.getElementById("age").value
+            ].map(Number);
+           
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ features: features })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect; // Redirect to result page
+                } else {
+                    document.getElementById("result").innerText = "Error in prediction.";
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+    
+</body>
+</html>

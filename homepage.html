@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabo Detect</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Gabriela+Stencil&display=swap');
+        
+        body {
+            font-family: 'Gabriela Stencil', serif;
+            text-align: center;
+            background: linear-gradient(to right, #6EC6FF, #DFF6FF);
+            color: #003366;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            font-size: 22px;
+            margin: 10px 20px;
+            max-width: 700px;
+            line-height: 1.6;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .section {
+            padding: 40px 20px;
+            width: 100%;
+        }
+        
+        .white-section {
+            background: white;
+            color: #0056b3;
+        }
+        
+        .light-gray-section {
+            background: #f4f4f4;
+            color: #003366;
+        }
+        
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 30px 0;
+        }
+        
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .icon img {
+            width: 60px;
+            height: 60px;
+            filter: invert(20%) sepia(60%) saturate(300%) hue-rotate(180deg);
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            background: #00A896;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background: #007F6E;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Diabo Detect</h1>
+    <p>Take control of your health today with our smart diabetes risk assessment.</p>
+    <p>Your well-being is our priority – let’s make informed decisions together!</p>
+    
+    <div class="section white-section">
+        <div class="icon-container">
+            <div class="icon">
+                <img src="https://img.icons8.com/ios/50/artificial-intelligence.png" alt="AI-powered">
+                <p>AI-powered</p>
+            </div>
+            <div class="icon">
+                <img src="https://img.icons8.com/ios/50/lock--v1.png" alt="Secure Data">
+                <p>Secure Data</p>
+            </div>
+            <div class="icon">
+                <img src="https://img.icons8.com/ios/50/speed.png" alt="Fast Results">
+                <p>Fast Results</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section light-gray-section">
+        <a href="{{ url_for('index') }}" class="btn">Try Now</a>
+    </div>
+</body>
+</html>
